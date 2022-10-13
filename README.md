@@ -91,3 +91,15 @@ docker run --name jenkins -d -p 8080:8080 -p 50000:50000 -v /tmp/jenkins:/var/li
 ```
 
 ## kubernetes install
+
+öncelikle helm yüklemeniz gerekiyor. helm yükledikten sonra
+
+aşağıdaki komutları çalıştırıp jenkinsi kubernetes üzerine yükleyebiliriz.
+
+```
+kubectl create ns jenkins
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+helm install jenkins bitnami/jenkins -n jenkins
+```
