@@ -50,4 +50,44 @@ docker volume create jenkins_path
 docker run --name jenkins -d -v jenkins_path:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
 ```
 
+eğer jenkins ile docker build ve push yapmak gerekiyorsa slave olarak dind kullanmanız ve volume olarak docker.sock u da mount etmeniz gerekiyor. jenkins imagei üzerine docker yükleyerek bunun üstesinden gelebilirsiniz.
+
+öncelikle bir Dockerfile gerekiyor
+
+```
+FROM jenkins/jenkins:jdk11
+ 
+USER root
+
+RUN apt-get update -y
+
+RUN apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+RUN mkdir -p /etc/apt/keyrings
+
+RUN  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+RUN echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+RUN apt-get update
+
+RUN apt-get install -y docker-ce docker-ce-cli containerd.io 
+
+RUN usermod -aG docker jenkins
+```
+
+docker build -t jenkins:dind .
+
+yapıp build aldıktan sonra, docker.sock u mount ederek çalıştıracağız
+
+```
+docker run --name jenkins -d -p 8080:8080 -p 50000:50000 -v /tmp/jenkins:/var/lib/jenkins -v /var/run/docker.sock:/var/run/docker.sock jenkins:dind
+```
+
 ## kubernetes install
