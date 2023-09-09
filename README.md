@@ -97,9 +97,7 @@ docker run --name jenkins -d -p 8080:8080 -p 50000:50000 -v /tmp/jenkins:/var/li
 aşağıdaki komutları çalıştırıp jenkinsi kubernetes üzerine yükleyebiliriz.
 
 ```
-kubectl create ns jenkins
-
-helm repo add bitnami https://charts.bitnami.com/bitnami
-
-helm install jenkins bitnami/jenkins -n jenkins
+helm repo add jenkins https://charts.jenkins.io
+helm repo update
+helm install jenkins jenkins/jenkins --namespace jenkins --create-namespace
 ```
