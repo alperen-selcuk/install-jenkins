@@ -1,6 +1,6 @@
 # install-jenkins
 
-## ubuntu install
+## ubuntu 22.04 install
 
 jenkins pre-req olarak java istemektedir. öncelikle update ve upgrade yapıp java yükleyelim.
 
