@@ -13,13 +13,10 @@ sudo apt update && \
 daha sonra jenkins yükleyebiliriz.
 
 ```
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
-  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-  
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list > /dev/null
-  
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]  https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
 sudo apt-get update -y && sudo apt-get install jenkins -y
 ```
 
@@ -43,6 +40,10 @@ export PATH=$PATH:$JAVA_HOME/bin
 > **Warning**  maven kullanmak isterseniz ve hata alırsanız, jenkinse "global tool configuration" üzerinden mvn pathini belirtmeniz gerekiyor
 
 ## docker install
+
+öncelikle docker yükleyelim. aşağıdaki sicripti kullanabilirsiniz.
+
+https://raw.githubusercontent.com/alperen-selcuk/docker-install/main/ubuntu-2204.sh
 
 önce bir docker volume yaratacağız yaptığımız configler container silinirse gitmemesi için.
 
