@@ -2,10 +2,12 @@
 
 ## ubuntu install
 
-jenkins pre-req olarak java istemektedir.
+jenkins pre-req olarak java istemektedir. öncelikle update ve upgrade yapıp java yükleyelim.
 
 ```
-sudo apt-get update -y && sudo apt-get install openjdk-11-jre -y
+sudo apt update && \
+   sudo apt upgrade -y && \
+   sudo apt install openjdk-11-jre -y
 ```
 
 daha sonra jenkins yükleyebiliriz.
