@@ -1,6 +1,6 @@
 # install-jenkins
 
-![image](https://github.com/user-attachments/assets/885a7c89-1c80-4f26-8b73-690b3b560434)
+![Repository Preview](https://github.com/user-attachments/assets/885a7c89-1c80-4f26-8b73-690b3b560434))
 
 
 ## ubuntu 22.04 install
